@@ -15,5 +15,5 @@ func main() {
 	}
 	//i might remove the making of a command.Map but atm its in for init command injection
 	handler := GoingCommando.New(dg,command.Map{},"!")
-	handler.Get
+	handler.GetCommandHandler().RegisterCommand("Ping",Ping{"Ping"},true)
 }

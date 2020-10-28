@@ -2,6 +2,7 @@ package GoingCommando
 
 import (
 	"github.com/Jviguy/GoingCommando/command"
+	"github.com/Jviguy/GoingCommando/command/ctx"
 	"github.com/bwmarrin/discordgo"
 	"strings"
 )
@@ -30,7 +31,7 @@ func (h PremadeHandler) handle(s *discordgo.Session, msg *discordgo.MessageCreat
 	if strings.HasPrefix(msg.Content,h.Prefix){
 		args := strings.Split(strings.TrimPrefix(msg.Content,h.Prefix)," ")
 		args , cmd := Shift(args,0)
-		err := h.cmds.Execute(cmd,args,s)
+		err := h.cmds.Execute(cmd,ctx.New(args,msg,s),s)
 		if err != nil{
 			_,err = s.ChannelMessageSend(msg.ChannelID,"An Error Occurred while executing that command" +
 				"\nDEBUG: " + err.Error())
