@@ -11,7 +11,8 @@ import (
 )
 
 func main()  {
-	dg, err := discordgo.New("Bot " + "NzUyNjkxMDU2ODgxMTcyNjIy.X1bULA.CrYPU434skqnFOpzbr-FkovwAfE")
+	//my token was there for a old bot again so fuck me lmao
+	dg, err := discordgo.New("Bot " + "TOKEN HERE")
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
