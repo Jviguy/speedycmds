@@ -2,20 +2,18 @@ package utils
 
 import (
 	"github.com/agnivade/levenshtein"
+	"sort"
 )
 
 func FindClosest(search string,array []string) string {
 	var x []int
-	x = make([]int , 0,len(array))
-	for _,val := range array {
-		c := levenshtein.ComputeDistance(search,val)
-		x = append(x,c)
+	x = make([]int, len(array))
+	for k, val := range array {
+		c := levenshtein.ComputeDistance(search, val)
+		x[k] = c
 	}
-	max := x[0]
-	for i:=0; i<len(x); i++ {
-		if x[i] > max {
-			max = x[i]
-		}
-	}
-	return array[x[max]]
+	y := x
+	sort.Ints(y)
+	k := sort.SearchInts(x,y[0])
+	return array[k]
 }

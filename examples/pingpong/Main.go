@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	dg, err := discordgo.New("Bot " + "")
+	dg, err := discordgo.New("Bot " + "TOKEN HERE")
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
@@ -19,6 +19,10 @@ func main() {
 	//i might remove the making of a command.Map but atm its in for init command injection
 	handler := GoingCommando.New(dg,commandmap.New(),"!")
 	handler.GetCommandHandler().RegisterCommand("Ping",Ping{"Ping"},true)
+	handler.GetCommandHandler().RegisterCommand("Snipe",Ping{"Snipe"},true)
+	handler.GetCommandHandler().RegisterCommand("Dickker",Ping{"Dickker"},true)
+	handler.GetCommandHandler().RegisterCommand("REEE",Ping{"REEE"},true)
+	handler.GetCommandHandler().RegisterCommand("REEEEER",Ping{"REEEEER"},true)
 	err = dg.Open()
 	if err != nil {
 		fmt.Println("error opening connection,", err)
