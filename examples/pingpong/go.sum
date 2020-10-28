@@ -6,6 +6,8 @@ github.com/Jviguy/GoingCommando v0.0.2-0.20201028185231-19f4518389ab h1:SZ4/w8/W
 github.com/Jviguy/GoingCommando v0.0.2-0.20201028185231-19f4518389ab/go.mod h1:R5zS8E8gNGaeGKgUx+CiZ5i9SKHzuGuh2mMep75sqIk=
 github.com/Jviguy/GoingCommando v0.1.0 h1:oSbcP2zTqkaqSmtbonFDpMLmcDWtIbv11Z/9tANex70=
 github.com/Jviguy/GoingCommando v0.1.0/go.mod h1:R5zS8E8gNGaeGKgUx+CiZ5i9SKHzuGuh2mMep75sqIk=
+github.com/Jviguy/GoingCommando v0.1.1 h1:lY6hMTBl1EVxkZfulu66f3Qu9boa+6LUMFfrRoIk7uY=
+github.com/Jviguy/GoingCommando v0.1.1/go.mod h1:R5zS8E8gNGaeGKgUx+CiZ5i9SKHzuGuh2mMep75sqIk=
 github.com/bwmarrin/discordgo v0.22.0 h1:uBxY1HmlVCsW1IuaPjpCGT6A2DBwRn0nvOguQIxDdFM=
 github.com/bwmarrin/discordgo v0.22.0/go.mod h1:c1WtWUGN6nREDmzIpyTp/iD3VYt4Fpx+bVyfBG7JE+M=
 github.com/gorilla/websocket v1.4.0 h1:WDFjx/TMzVgy9VdMMQi2K2Emtwi2QcUQsztZ/zLaH/Q=
