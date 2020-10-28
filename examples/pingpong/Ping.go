@@ -10,6 +10,10 @@ type Ping struct {
 	name string
 }
 
+func (p Ping) Setname(newname string) {
+	p.name = newname
+}
+
 func (p Ping) GetName() string {
 	return p.name
 }
