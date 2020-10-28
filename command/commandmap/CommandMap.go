@@ -26,7 +26,7 @@ func (m Map) Execute(command string,ctx ctx.Ctx,s *discordgo.Session) error {
 	}
 	var closest string
 	go func() {
-		closest = utils.FindClosest(command,utils.GetAllKeys(m.commands))
+		closest = utils.FindClosest(strings.ToLower(command),utils.GetAllKeys(m.commands))
 	}()
 	em := discordgo.MessageEmbed{}
 	em.Title = "Unknown Command: " + command
