@@ -1,4 +1,4 @@
-module GoingCommando
+module github.com/Jviguy/GoingCommando
 
 go 1.14
 

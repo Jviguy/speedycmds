@@ -1,7 +1,7 @@
 package GoingCommando
 
 import (
-	"GoingCommando/command"
+	"github.com/Jviguy/GoingCommando/command"
 	"github.com/bwmarrin/discordgo"
 	"strings"
 )
