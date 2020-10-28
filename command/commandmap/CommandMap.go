@@ -35,3 +35,7 @@ func (m Map) CanRegisterCommand(name string) bool {
 func (m Map) GetCommands() map[string]command.Command {
 	return m.commands
 }
+
+func New() Map {
+	return Map{commands: map[string]command.Command{}}
+}
