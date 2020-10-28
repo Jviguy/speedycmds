@@ -32,7 +32,15 @@
     <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build CustomCommandHandlers">
+    <configuration name="go build CustomCommandHandlers" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="GoingCommando" />
+      <working_directory value="$PROJECT_DIR$/examples/CustomCommandHandlers" />
+      <kind value="PACKAGE" />
+      <package value="CustomCommandHandlers" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build pingpong" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="GoingCommando" />
       <working_directory value="$PROJECT_DIR$/examples/pingpong" />
@@ -43,6 +51,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build CustomCommandHandlers" />
         <item itemvalue="Go Build.go build pingpong" />
       </list>
     </recent_temporary>
@@ -55,22 +64,22 @@
     <integration-enabled>true</integration-enabled>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1603919919363">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1603921812738">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603919919363" />
-    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1603919919362">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603921812738" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1603921812738">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603919919362" />
-    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1603919919362">
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603921812737" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1603921812737">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603919919362" />
-    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1603919919362">
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603921812737" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1603921812738">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603919919362" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603921812738" />
     <state x="363" y="253" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1603916727789">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

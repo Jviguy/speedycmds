@@ -26,7 +26,7 @@ func (m Map) Execute(command string,ctx ctx.Ctx,s *discordgo.Session) error {
 	}
 	em := discordgo.MessageEmbed{}
 	em.Title = "Unknown Command: " + command
-	em.Description = "You might have Meant: " + utils.FindClosest(strings.ToLower(command),utils.GetAllKeys(m.commands))
+	em.Description = "You might have Meant: " + utils.FindClosest(command,utils.GetAllKeys(m.commands))
 	_,_ = s.ChannelMessageSendEmbed(ctx.GetChannel().ID,&em)
 	return nil
 }
@@ -34,6 +34,10 @@ func (m Map) Execute(command string,ctx ctx.Ctx,s *discordgo.Session) error {
 func (m Map) RegisterCommand(name string,command command.Command, override bool) {
 	if m.CanRegisterCommand(name) || override{
 		m.commands[strings.ToLower(name)] = command
+		//for when someone doesnt put it in the struct
+		if command.GetName() == ""{
+			command.Setname(name)
+		}
 	}
 }
 
