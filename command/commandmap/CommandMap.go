@@ -24,13 +24,9 @@ func (m Map) Execute(command string,ctx ctx.Ctx,s *discordgo.Session) error {
 	if m.CanExecute(command) {
 		return m.commands[strings.ToLower(command)].Execute(ctx,s)
 	}
-	var closest string
-	go func() {
-		closest = utils.FindClosest(strings.ToLower(command),utils.GetAllKeys(m.commands))
-	}()
 	em := discordgo.MessageEmbed{}
 	em.Title = "Unknown Command: " + command
-	em.Description = "You might have Meant: " + closest
+	em.Description = "You might have Meant: " + utils.FindClosest(strings.ToLower(command),utils.GetAllKeys(m.commands))
 	_,_ = s.ChannelMessageSendEmbed(ctx.GetChannel().ID,&em)
 	return nil
 }
