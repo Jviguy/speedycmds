@@ -1,7 +1,7 @@
 package GoingCommando
 
 import (
-	"github.com/Jviguy/GoingCommando/command"
+	"github.com/Jviguy/GoingCommando/command/commandmap"
 	"github.com/Jviguy/GoingCommando/command/ctx"
 	"github.com/bwmarrin/discordgo"
 	"strings"
@@ -9,16 +9,16 @@ import (
 
 type Handler interface {
 	Handle(s *discordgo.Session, msg *discordgo.MessageCreate)
-	GetCommandHandler() command.Map
+	GetCommandHandler() commandmap.Map
 }
 //this is the basic premade handler with support for one prefix u can change it up how u want because of the whole interfaces
 type PremadeHandler struct {
 	dg *discordgo.Session
-	cmds command.Map
+	cmds commandmap.Map
 	Prefix string
 }
 //initalizes a basic premade handler for you.
-func New(dg *discordgo.Session,cmds command.Map,prefix string) PremadeHandler {
+func New(dg *discordgo.Session,cmds commandmap.Map,prefix string) PremadeHandler {
 	h := PremadeHandler{dg,cmds,prefix}
 	dg.AddHandler(h.handle)
 	return h
@@ -38,7 +38,7 @@ func (h PremadeHandler) handle(s *discordgo.Session, msg *discordgo.MessageCreat
 		}
 	}
 }
-func (h PremadeHandler) GetCommandHandler() command.Map {
+func (h PremadeHandler) GetCommandHandler() commandmap.Map {
 	return h.cmds
 }
 

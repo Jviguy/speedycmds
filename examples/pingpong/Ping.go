@@ -14,6 +14,7 @@ func (p Ping) GetName() string {
 }
 
 func (p Ping) Execute(ctx ctx.Ctx, session *discordgo.Session) error {
-
+	_, err := session.ChannelMessageSend(ctx.GetChannel().ID, "Pong!")
+	return err
 }
 
