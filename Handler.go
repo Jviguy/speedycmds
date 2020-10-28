@@ -8,6 +8,7 @@ import (
 
 type Handler interface {
 	Handle(s *discordgo.Session, msg *discordgo.MessageCreate)
+	GetCommandHandler() command.Map
 }
 //this is the basic premade handler with support for one prefix u can change it up how u want because of the whole interfaces
 type PremadeHandler struct {
@@ -18,11 +19,11 @@ type PremadeHandler struct {
 //initalizes a basic premade handler for you.
 func New(dg *discordgo.Session,cmds command.Map,prefix string) PremadeHandler {
 	h := PremadeHandler{dg,cmds,prefix}
-	dg.AddHandler(h.Handle)
+	dg.AddHandler(h.handle)
 	return h
 }
 //called when a message is sent checks if its a bot and if it has the right prefix
-func (h PremadeHandler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
+func (h PremadeHandler) handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	if msg.Author.Bot {
 		return
 	}
@@ -35,6 +36,9 @@ func (h PremadeHandler) Handle(s *discordgo.Session, msg *discordgo.MessageCreat
 				"\nDEBUG: " + err.Error())
 		}
 	}
+}
+func (h PremadeHandler) GetCommandHandler() command.Map {
+	return h.cmds
 }
 
 func Shift(a []string,i int) ([]string,string) {
