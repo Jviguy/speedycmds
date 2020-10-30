@@ -1,11 +1,22 @@
 package utils
 
-import "github.com/Jviguy/GoingCommando/command"
+import (
+	"github.com/Jviguy/GoingCommando/command"
+	"github.com/Jviguy/GoingCommando/command/commandGroup"
+)
 
-func GetAllKeys(m map[string]command.Command) []string {
+func GetAllKeysCommands(m map[string]command.Command) []string {
 	keys := make([]string, 0, len(m))
-	for _,val := range m {
-		keys = append(keys, val.GetName())
+	for k,_ := range m {
+		keys = append(keys, k)
+	}
+	return keys
+}
+
+func GetAllKeysGroups(m map[string]commandGroup.Group) []string {
+	keys := make([]string, 0, len(m))
+	for k,_ := range m {
+		keys = append(keys, k)
 	}
 	return keys
 }
