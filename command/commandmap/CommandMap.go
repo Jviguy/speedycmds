@@ -52,10 +52,15 @@ func (m Map) Execute(command string,c ctx.Ctx,s *discordgo.Session) error {
 	case m.CanExecute(command):
 		return m.commands[strings.ToLower(command)].Execute(c,s)
 	case m.DoesGroupExist(command):
-		args,cmd := shift(c.GetArgs(),0)
-		ct := ctx.New(args,c.GetMessage(),s)
-		//custom ctx for the custom args needed
-		return m.GetGroup(cmd).Execute(command,ct,s)
+		if len(c.GetArgs()) > 0 {
+			args,cmd := shift(c.GetArgs(),0)
+			if m.GetGroup(command).CanExecute(cmd) {
+				ct := ctx.New(args, c.GetMessage(), s)
+				//custom ctx for the custom args needed
+				return m.GetGroup(command).Execute(cmd, ct, s)
+			}
+		}
+		fallthrough
 	default:
 		em := discordgo.MessageEmbed{}
 		em.Title = "Unknown Command: " + command

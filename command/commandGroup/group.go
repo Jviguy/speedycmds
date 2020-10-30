@@ -11,6 +11,7 @@ type Group interface {
 	AddCommand(name string,cmd command.Command)
 	GetCommand(cmd string) command.Command
 	GetCommands() map[string]command.Command
+	CanExecute(cmd string) bool
 	Execute(cmd string,ctx ctx.Ctx,session *discordgo.Session) error
 }
 
@@ -18,6 +19,11 @@ type CmdGroup struct {
 	name string
 	//the registered commands added to this group this works outside the main "Command Map" while the group is in it
 	commands map[string]command.Command
+}
+
+func (c CmdGroup) CanExecute(cmd string) bool {
+	_,ok := c.GetCommands()[cmd]
+	return ok
 }
 
 func (c CmdGroup) GetName() string {

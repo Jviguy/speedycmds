@@ -19,7 +19,7 @@ func main() {
 	}
 	//i might remove the making of a command.Map but atm its in for init command injection
 	handler := GoingCommando.New(dg,commandmap.New(),"!")
-	pg := commandGroup.CmdGroup{}
+	pg := commandGroup.New("api")
 	pg.AddCommand("ping",Ping{"Ping"})
 	handler.GetCommandHandler().RegisterCommandGroup("api",pg)
 	err = dg.Open()
