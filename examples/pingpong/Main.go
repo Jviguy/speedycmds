@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/Jviguy/GoingCommando"
+	"github.com/Jviguy/GoingCommando/command/commandGroup"
 	"github.com/Jviguy/GoingCommando/command/commandmap"
 	"github.com/bwmarrin/discordgo"
 	"os"
@@ -18,11 +19,9 @@ func main() {
 	}
 	//i might remove the making of a command.Map but atm its in for init command injection
 	handler := GoingCommando.New(dg,commandmap.New(),"!")
-	handler.GetCommandHandler().RegisterCommand("Ping",Ping{"Ping"},true)
-	handler.GetCommandHandler().RegisterCommand("Snipe",Ping{"Snipe"},true)
-	handler.GetCommandHandler().RegisterCommand("Dickker",Ping{"Dickker"},true)
-	handler.GetCommandHandler().RegisterCommand("REEE",Ping{"REEE"},true)
-	handler.GetCommandHandler().RegisterCommand("REEEEER",Ping{"REEEEER"},true)
+	pg := commandGroup.CmdGroup{}
+	pg.AddCommand("ping",Ping{"Ping"})
+	handler.GetCommandHandler().RegisterCommandGroup("api",pg)
 	err = dg.Open()
 	if err != nil {
 		fmt.Println("error opening connection,", err)

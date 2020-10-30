@@ -40,3 +40,7 @@ func (c CmdGroup) GetCommands() map[string]command.Command {
 	return c.commands
 }
 
+func New(name string) CmdGroup {
+	return CmdGroup{name: name,commands: map[string]command.Command{}}
+}
+
