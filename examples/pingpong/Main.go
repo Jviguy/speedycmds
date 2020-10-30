@@ -19,8 +19,11 @@ func main() {
 	}
 	//i might remove the making of a command.Map but atm its in for init command injection
 	handler := GoingCommando.New(dg,commandmap.New(),"!")
+	//init a new base command group the name in the struct doesnt matter btw
 	pg := commandGroup.New("api")
+	//add a command to the said command group
 	pg.AddCommand("ping",Ping{"Ping"})
+	//add the said command group to the commandHandler HERE THE NAME MATTERS
 	handler.GetCommandHandler().RegisterCommandGroup("api",pg)
 	err = dg.Open()
 	if err != nil {
