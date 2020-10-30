@@ -1,7 +1,6 @@
 package commandmap
 
 import (
-	"github.com/Jviguy/GoingCommando"
 	"github.com/Jviguy/GoingCommando/command"
 	"github.com/Jviguy/GoingCommando/command/commandGroup"
 	"github.com/Jviguy/GoingCommando/command/ctx"
@@ -53,7 +52,7 @@ func (m Map) Execute(command string,c ctx.Ctx,s *discordgo.Session) error {
 	case m.CanExecute(command):
 		return m.commands[strings.ToLower(command)].Execute(c,s)
 	case m.DoesGroupExist(command):
-		args,cmd := GoingCommando.Shift(c.GetArgs(),0)
+		args,cmd := shift(c.GetArgs(),0)
 		ct := ctx.New(args,c.GetMessage(),s)
 		//custom ctx for the custom args needed
 		return m.GetGroup(cmd).Execute(command,ct,s)
@@ -101,4 +100,12 @@ func New() Map {
 func (m Map) CanExecute(name string) bool {
 	_,ok := m.commands[name]
 	return ok
+}
+
+func shift(a []string,i int) ([]string,string) {
+	b := a[i]
+	copy(a[i:], a[i+1:]) // Shift a[i+1:] left one index.
+	a[len(a)-1] = ""     // Erase last element (write zero value).
+	a = a[:len(a)-1]     // Truncate slice.
+	return a,b
 }
