@@ -5,8 +5,11 @@ import (
 	"github.com/Jviguy/GoingCommando/command/commandMap"
 	"github.com/Jviguy/GoingCommando/command/ctx"
 	"github.com/bwmarrin/discordgo"
+	"regexp"
 	"strings"
-)
+	)
+
+var CommandRegex = regexp.MustCompile(`(?m)("[^"]+"|[^\s"]+)`)
 
 type Handler interface {
 	Handle(s *discordgo.Session, msg *discordgo.MessageCreate)
@@ -18,12 +21,15 @@ type Handler interface {
 type PremadeHandler struct {
 	dg *discordgo.Session
 	cmds *commandMap.Map
+	//states wether to use a regex match or a simple split
+	Regex bool
 	Prefix string
 }
 
 //initalizes a basic premade handler for you.
-func New(dg *discordgo.Session,cmds *commandMap.Map,prefix string) *PremadeHandler {
-	h := &PremadeHandler{dg,cmds,prefix}
+//noinspection ALL
+func New(dg *discordgo.Session,cmds *commandMap.Map,Regex bool,prefix string) *PremadeHandler {
+	h := &PremadeHandler{dg,cmds,Regex,prefix}
 	dg.AddHandler(h.handle)
 	return h
 }
@@ -34,12 +40,19 @@ func (h *PremadeHandler) handle(s *discordgo.Session, msg *discordgo.MessageCrea
 		return
 	}
 	if strings.HasPrefix(msg.Content,h.Prefix){
-		args := strings.Split(strings.TrimPrefix(msg.Content,h.Prefix)," ")
+		var args []string
+		args = strings.Split(strings.TrimPrefix(msg.Content,h.Prefix)," ")
+		if h.Regex {
+			args = CommandRegex.FindAllString(strings.TrimPrefix(msg.Content,h.Prefix),-1)
+		}
 		args , cmd := Shift(args,0)
 		err := h.cmds.Execute(cmd,ctx.New(args,msg,s),s)
 		if err != nil{
-			_,err = s.ChannelMessageSend(msg.ChannelID,"An Error Occurred while executing that command" +
-				"\nDEBUG: " + err.Error())
+			em := &discordgo.MessageEmbed{}
+			em.Title = "An Error Occurred while executing that command"
+			em.Description = err.Error()
+			em.Color = 16711680
+			_, _ = s.ChannelMessageSendEmbed(msg.ChannelID, em)
 		}
 	}
 }

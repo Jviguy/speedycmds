@@ -4,9 +4,6 @@
     <list default="true" id="e0544c94-8796-414b-96d1-223cabcdaa16" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/Handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/command/commandGroup/group.go" beforeDir="false" afterPath="$PROJECT_DIR$/command/commandGroup/group.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/command/commandmap/CommandMap.go" beforeDir="false" afterPath="$PROJECT_DIR$/command/commandMap/CommandMap.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/command/ctx/Ctx.go" beforeDir="false" afterPath="$PROJECT_DIR$/command/ctx/Ctx.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
