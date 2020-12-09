@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/Jviguy/GoingCommando/command/commandMap"
+	"github.com/Jviguy/SpeedyCmds/command/commandMap"
 	"github.com/bwmarrin/discordgo"
 )
 

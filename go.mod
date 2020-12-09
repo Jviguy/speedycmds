@@ -1,8 +1,8 @@
-module github.com/Jviguy/GoingCommando
+module github.com/Jviguy/SpeedyCmds
 
 go 1.14
 
 require (
-	github.com/agnivade/levenshtein v1.1.0 // indirect
+	github.com/agnivade/levenshtein v1.1.0
 	github.com/bwmarrin/discordgo v0.22.0
 )

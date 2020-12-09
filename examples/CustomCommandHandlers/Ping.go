@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Jviguy/GoingCommando/command/ctx"
+	"github.com/Jviguy/SpeedyCmds/command/ctx"
 	"github.com/bwmarrin/discordgo"
 	"strconv"
 )

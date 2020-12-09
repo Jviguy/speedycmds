@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"github.com/Jviguy/GoingCommando/command"
-	"github.com/Jviguy/GoingCommando/command/commandGroup"
+	"github.com/Jviguy/SpeedyCmds/command"
+	"github.com/Jviguy/SpeedyCmds/command/commandGroup"
 )
 
 func GetAllKeysCommands(m map[string]command.Command) []string {

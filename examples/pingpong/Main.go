@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/Jviguy/GoingCommando"
 	"github.com/Jviguy/GoingCommando/command/commandGroup"
-	"github.com/Jviguy/GoingCommando/command/commandmap"
+	"github.com/Jviguy/GoingCommando/command/commandMap"
 	"github.com/bwmarrin/discordgo"
 	"os"
 	"os/signal"
@@ -18,7 +18,7 @@ func main() {
 		return
 	}
 	//i might remove the making of a command.Map but atm its in for init command injection
-	handler := GoingCommando.New(dg,commandmap.New(),"!")
+	handler := GoingCommando.New(dg,commandMap.New(),"!")
 	//init a new base command group the name in the struct doesnt matter btw
 	pg := commandGroup.New("api")
 	//add a command to the said command group

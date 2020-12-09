@@ -1,10 +1,10 @@
 package commandMap
 
 import (
-	"github.com/Jviguy/GoingCommando/command"
-	"github.com/Jviguy/GoingCommando/command/commandGroup"
-	"github.com/Jviguy/GoingCommando/command/ctx"
-	"github.com/Jviguy/GoingCommando/utils"
+	"github.com/Jviguy/SpeedyCmds/command"
+	"github.com/Jviguy/SpeedyCmds/command/commandGroup"
+	"github.com/Jviguy/SpeedyCmds/command/ctx"
+	"github.com/Jviguy/SpeedyCmds/utils"
 	"github.com/bwmarrin/discordgo"
 	"strings"
 )

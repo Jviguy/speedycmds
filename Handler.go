@@ -1,9 +1,9 @@
 //A package for command routing with discordgo
-package GoingCommando
+package SpeedyCmds
 
 import (
-	"github.com/Jviguy/GoingCommando/command/commandMap"
-	"github.com/Jviguy/GoingCommando/command/ctx"
+	"github.com/Jviguy/SpeedyCmds/command/commandMap"
+	"github.com/Jviguy/SpeedyCmds/command/ctx"
 	"github.com/bwmarrin/discordgo"
 	"regexp"
 	"strings"

@@ -1,7 +1,7 @@
 package command
 
 import (
-	"github.com/Jviguy/GoingCommando/command/ctx"
+	"github.com/Jviguy/SpeedyCmds/command/ctx"
 	"github.com/bwmarrin/discordgo"
 )
 //the simple command Interface for executing code when its called.
