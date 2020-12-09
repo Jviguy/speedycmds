@@ -1,5 +1,8 @@
 github.com/Jviguy/GoingCommando v0.0.1 h1:BrxhIwsU1kUN1xMtfMM63l85P7yjc0z0ULrbUaUNIFo=
 github.com/Jviguy/GoingCommando v0.0.1/go.mod h1:R5zS8E8gNGaeGKgUx+CiZ5i9SKHzuGuh2mMep75sqIk=
+github.com/Jviguy/SpeedyCmds v0.0.4 h1:ddUx35Tn7JSJKfzyYTzkA5eWDyZW2L2woz5GbRumeEo=
+github.com/Jviguy/SpeedyCmds v0.0.4/go.mod h1:+ZSLJ8jobcvMHs5vd82tNdFfc5YnOwYTULY+SbiE0Mw=
+github.com/agnivade/levenshtein v1.1.0 h1:n6qGwyHG61v3ABce1rPVZklEYRT8NFpCMrpZdBUbYGM=
 github.com/agnivade/levenshtein v1.1.0/go.mod h1:veldBMzWxcCG2ZvUTKD2kJNRdCk5hVbJomOvKkmgYbo=
 github.com/arbovm/levenshtein v0.0.0-20160628152529-48b4e1c0c4d0/go.mod h1:t2tdKJDJF9BV14lnkjHmOQgcvEKgtqs5a1N3LNdJhGE=
 github.com/bwmarrin/discordgo v0.22.0 h1:uBxY1HmlVCsW1IuaPjpCGT6A2DBwRn0nvOguQIxDdFM=

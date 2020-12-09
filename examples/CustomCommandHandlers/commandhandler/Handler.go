@@ -2,7 +2,7 @@ package commandhandler
 
 import (
 	"github.com/Jviguy/SpeedyCmds"
-	"github.com/Jviguy/SpeedyCmds/command/commandmap"
+	"github.com/Jviguy/SpeedyCmds/command/commandMap"
 	"github.com/Jviguy/SpeedyCmds/command/ctx"
 	"github.com/bwmarrin/discordgo"
 	"strings"
@@ -10,7 +10,7 @@ import (
 
 type Handler struct {
 	dg *discordgo.Session
-	cmds commandmap.Map
+	cmds *commandMap.Map
 	Prefixs []string
 }
 
@@ -32,11 +32,11 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	}
 }
 
-func (h Handler) GetCommandHandler() commandmap.Map {
+func (h Handler) GetCommandHandler() *commandMap.Map {
 	return h.cmds
 }
 
-func New(session *discordgo.Session,cmds commandmap.Map,prefix []string) Handler {
+func New(session *discordgo.Session,cmds *commandMap.Map,prefix []string) Handler {
 	h := Handler{dg: session,cmds: cmds,Prefixs: prefix}
 	session.AddHandler(h.Handle)
 	return h
