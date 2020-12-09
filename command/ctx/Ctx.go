@@ -38,8 +38,8 @@ func (b BaseCtx) GetMessage() *discordgo.MessageCreate {
 	return b.message
 }
 
-func New(args []string,msg *discordgo.MessageCreate,session *discordgo.Session) BaseCtx {
-	ctx := BaseCtx{args: args}
+func New(args []string,msg *discordgo.MessageCreate,session *discordgo.Session) *BaseCtx {
+	ctx := &BaseCtx{args: args}
 	ctx.author = msg.Author
 	ctx.channel,_ = session.Channel(msg.ChannelID)
 	ctx.guild,_ = session.Guild(msg.GuildID)

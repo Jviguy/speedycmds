@@ -1,7 +1,8 @@
+//A package for command routing with discordgo
 package GoingCommando
 
 import (
-	"github.com/Jviguy/GoingCommando/command/commandmap"
+	"github.com/Jviguy/GoingCommando/command/commandMap"
 	"github.com/Jviguy/GoingCommando/command/ctx"
 	"github.com/bwmarrin/discordgo"
 	"strings"
@@ -9,22 +10,26 @@ import (
 
 type Handler interface {
 	Handle(s *discordgo.Session, msg *discordgo.MessageCreate)
-	GetCommandHandler() commandmap.Map
+	//Returns a *commandmap.Map in use for this Handler
+	GetCommandMap() *commandMap.Map
 }
+
 //this is the basic premade handler with support for one prefix u can change it up how u want because of the whole interfaces
 type PremadeHandler struct {
 	dg *discordgo.Session
-	cmds commandmap.Map
+	cmds *commandMap.Map
 	Prefix string
 }
+
 //initalizes a basic premade handler for you.
-func New(dg *discordgo.Session,cmds commandmap.Map,prefix string) PremadeHandler {
-	h := PremadeHandler{dg,cmds,prefix}
+func New(dg *discordgo.Session,cmds *commandMap.Map,prefix string) *PremadeHandler {
+	h := &PremadeHandler{dg,cmds,prefix}
 	dg.AddHandler(h.handle)
 	return h
 }
+
 //called when a message is sent checks if its a bot and if it has the right prefix
-func (h PremadeHandler) handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
+func (h *PremadeHandler) handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	if msg.Author.Bot {
 		return
 	}
@@ -38,7 +43,8 @@ func (h PremadeHandler) handle(s *discordgo.Session, msg *discordgo.MessageCreat
 		}
 	}
 }
-func (h PremadeHandler) GetCommandHandler() commandmap.Map {
+
+func (h *PremadeHandler) GetCommandHandler() *commandMap.Map {
 	return h.cmds
 }
 

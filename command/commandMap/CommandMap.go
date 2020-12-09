@@ -1,4 +1,4 @@
-package commandmap
+package commandMap
 
 import (
 	"github.com/Jviguy/GoingCommando/command"
@@ -21,33 +21,33 @@ type Map struct {
 	commands map[string]command.Command
 	groups map[string]commandGroup.Group
 }
-func (m Map) RegisterCommandGroup(name string,group commandGroup.Group){
+func (m *Map) RegisterCommandGroup(name string,group commandGroup.Group){
 	if !m.DoesGroupExist(name) && m.CanRegisterGroup(name){
 		m.groups[name] = group
 	}
 }
 
-func (m Map) GetGroups() map[string]commandGroup.Group {
+func (m *Map) GetGroups() map[string]commandGroup.Group {
 	return m.groups
 }
 
-func (m Map) GetGroup(name string) commandGroup.Group {
+func (m *Map) GetGroup(name string) commandGroup.Group {
 	if m.DoesGroupExist(name) {
 		return m.groups[name]
 	}
 	return nil
 }
 
-func (m Map) CanRegisterGroup(name string) bool {
+func (m *Map) CanRegisterGroup(name string) bool {
 	return m.commands[name] == nil && m.GetGroup(name) == nil
 }
 
-func (m Map) DoesGroupExist(name string) bool {
+func (m *Map) DoesGroupExist(name string) bool {
 	_,b := m.groups[name]
 	return b
 }
 
-func (m Map) Execute(command string,c ctx.Ctx,s *discordgo.Session) error {
+func (m *Map) Execute(command string,c ctx.Ctx,s *discordgo.Session) error {
 	switch true {
 	case m.CanExecute(command):
 		return m.commands[strings.ToLower(command)].Execute(c,s)
@@ -70,7 +70,7 @@ func (m Map) Execute(command string,c ctx.Ctx,s *discordgo.Session) error {
 	}
 }
 
-func (m Map) GetAllCommands() map[string]command.Command {
+func (m *Map) GetAllCommands() map[string]command.Command {
 	cs := m.GetCommands()
 	for k,g := range m.GetGroups(){
 		for name,cmd := range g.GetCommands(){
@@ -80,7 +80,7 @@ func (m Map) GetAllCommands() map[string]command.Command {
 	return cs
 }
 
-func (m Map) RegisterCommand(name string,command command.Command, override bool) {
+func (m *Map) RegisterCommand(name string,command command.Command, override bool) {
 	if m.CanRegisterCommand(name) || override{
 		m.commands[strings.ToLower(name)] = command
 		//for when someone doesnt put it in the struct
@@ -90,19 +90,20 @@ func (m Map) RegisterCommand(name string,command command.Command, override bool)
 	}
 }
 
-func (m Map) CanRegisterCommand(name string) bool {
+func (m *Map) CanRegisterCommand(name string) bool {
 	return m.commands[name] == nil && m.GetGroup(name) == nil
 }
 
-func (m Map) GetCommands() map[string]command.Command {
+func (m *Map) GetCommands() map[string]command.Command {
 	return m.commands
 }
 
-func New() Map {
-	return Map{commands: map[string]command.Command{},groups: map[string]commandGroup.Group{}}
+//noinspection ALL
+func New() *Map {
+	return &Map{commands: map[string]command.Command{},groups: map[string]commandGroup.Group{}}
 }
 
-func (m Map) CanExecute(name string) bool {
+func (m *Map) CanExecute(name string) bool {
 	_,ok := m.commands[name]
 	return ok
 }
