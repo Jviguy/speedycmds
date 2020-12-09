@@ -3,7 +3,7 @@ module CustomCommandHandlers
 go 1.14
 
 require (
-	github.com/Jviguy/GoingCommando v0.0.1
+	github.com/Jviguy/SpeedyCmds v0.0.3
 	github.com/agnivade/levenshtein v1.1.0 // indirect
 	github.com/bwmarrin/discordgo v0.22.0
 	github.com/gorilla/websocket v1.4.2 // indirect

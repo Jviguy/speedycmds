@@ -1,9 +1,9 @@
 package commandhandler
 
 import (
-	"github.com/Jviguy/GoingCommando"
-	"github.com/Jviguy/GoingCommando/command/commandmap"
-	"github.com/Jviguy/GoingCommando/command/ctx"
+	"github.com/Jviguy/SpeedyCmds"
+	"github.com/Jviguy/SpeedyCmds/command/commandmap"
+	"github.com/Jviguy/SpeedyCmds/command/ctx"
 	"github.com/bwmarrin/discordgo"
 	"strings"
 )
@@ -21,7 +21,7 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	for _,value := range h.Prefixs {
 		if strings.HasPrefix(msg.Content, value) {
 			args := strings.Split(strings.TrimPrefix(msg.Content, value), " ")
-			args, cmd := GoingCommando.Shift(args, 0)
+			args, cmd := SpeedyCmds.Shift(args, 0)
 			err := h.cmds.Execute(cmd, ctx.New(args, msg, s), s)
 			if err != nil {
 				_, err = s.ChannelMessageSend(msg.ChannelID, "An Error Occurred while executing that command"+
