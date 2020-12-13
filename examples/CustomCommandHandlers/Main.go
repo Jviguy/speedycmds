@@ -1,14 +1,12 @@
 package main
 
 import (
-	"CustomCommandHandlers/commandhandler"
 	"fmt"
+	"github.com/Jviguy/SpeedyCmds/command/commandMap"
+	"github.com/bwmarrin/discordgo"
 	"os"
 	"os/signal"
 	"syscall"
-
-	"github.com/Jviguy/SpeedyCmds/command/commandMap"
-	"github.com/bwmarrin/discordgo"
 )
 
 func main() {
@@ -25,7 +23,7 @@ func main() {
 	}
 	var prefixes = []string{"!", "go ", "bruh ", "-"}
 	//use of a custom implemented Handler that allows for multiple prefixes
-	handler := commandhandler.New(dg, commandMap.New(), prefixes)
+	handler := New(dg, commandMap.New(), prefixes)
 	handler.GetCommandHandler().RegisterCommand("ping", Ping{"ping"}, true)
 	// Wait here until CTRL-C or other term signal is received.
 	fmt.Println("Bot is now running.  Press CTRL-C to exit.")

@@ -1,4 +1,4 @@
-package commandhandler
+package main
 
 import (
 	"github.com/Jviguy/SpeedyCmds"
