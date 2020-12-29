@@ -26,7 +26,7 @@ type PremadeHandler struct {
 	Prefix string
 }
 
-//initalizes a basic premade handler for you.
+//initializes a basic pre made handler for you.
 //noinspection ALL
 func New(dg *discordgo.Session,cmds *commandMap.Map,Regex bool,prefix string) *PremadeHandler {
 	h := &PremadeHandler{dg,cmds,Regex,prefix}
@@ -57,7 +57,7 @@ func (h *PremadeHandler) handle(s *discordgo.Session, msg *discordgo.MessageCrea
 	}
 }
 
-func (h *PremadeHandler) GetCommandHandler() *commandMap.Map {
+func (h *PremadeHandler) GetCommandMap() *commandMap.Map {
 	return h.cmds
 }
 

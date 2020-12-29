@@ -7,24 +7,22 @@ import (
 	"github.com/Jviguy/SpeedyCmds/utils"
 	"github.com/bwmarrin/discordgo"
 	"strings"
+	"sync"
 )
 
-type CmdMap interface {
-	Execute(command string,ctx ctx.Ctx,s *discordgo.Session) error
-	RegisterCommand(name string,command command.Command,override bool)
-	CanRegisterCommand(name string) bool
-	GetCommands() map[string]command.Command
-	CanExecute(name string) bool
-}
-
 type Map struct {
+	mutex sync.Mutex
 	commands map[string]command.Command
 	groups map[string]commandGroup.Group
 }
-func (m *Map) RegisterCommandGroup(name string,group commandGroup.Group){
-	if !m.DoesGroupExist(name) && m.CanRegisterGroup(name){
+
+
+func (m *Map) RegisterCommandGroup(name string,group commandGroup.Group) {
+	m.mutex.Lock()
+	if !m.DoesGroupExist(name) && m.CanRegisterGroup(name) {
 		m.groups[name] = group
 	}
+	m.mutex.Unlock()
 }
 
 func (m *Map) GetGroups() map[string]commandGroup.Group {
@@ -48,8 +46,10 @@ func (m *Map) DoesGroupExist(name string) bool {
 }
 
 func (m *Map) Execute(command string,c ctx.Ctx,s *discordgo.Session) error {
+	m.mutex.Lock()
 	switch true {
 	case m.CanExecute(command):
+		m.mutex.Unlock()
 		return m.commands[strings.ToLower(command)].Execute(c,s)
 	case m.DoesGroupExist(command):
 		if len(c.GetArgs()) > 0 {
@@ -57,11 +57,13 @@ func (m *Map) Execute(command string,c ctx.Ctx,s *discordgo.Session) error {
 			if m.GetGroup(command).CanExecute(cmd) {
 				ct := ctx.New(args, c.GetMessage(), s)
 				//custom ctx for the custom args needed
+				m.mutex.Unlock()
 				return m.GetGroup(command).Execute(cmd, ct, s)
 			}
 		}
 		fallthrough
 	default:
+		m.mutex.Unlock()
 		em := discordgo.MessageEmbed{}
 		em.Title = "Unknown Command: " + command
 		em.Description = "You might have Meant: " + utils.FindClosest(command, utils.GetAllKeysCommands(m.GetAllCommands()))
@@ -71,23 +73,23 @@ func (m *Map) Execute(command string,c ctx.Ctx,s *discordgo.Session) error {
 }
 
 func (m *Map) GetAllCommands() map[string]command.Command {
+	m.mutex.Lock()
 	cs := m.GetCommands()
 	for k,g := range m.GetGroups(){
 		for name,cmd := range g.GetCommands(){
 			cs[k+" "+name] = cmd
 		}
 	}
+	m.mutex.Unlock()
 	return cs
 }
 
 func (m *Map) RegisterCommand(name string,command command.Command, override bool) {
-	if m.CanRegisterCommand(name) || override{
+	m.mutex.Lock()
+	if m.CanRegisterCommand(name) || override {
 		m.commands[strings.ToLower(name)] = command
-		//for when someone doesnt put it in the struct
-		if command.GetName() == ""{
-			command.Setname(name)
-		}
 	}
+	m.mutex.Unlock()
 }
 
 func (m *Map) CanRegisterCommand(name string) bool {
@@ -104,7 +106,9 @@ func New() *Map {
 }
 
 func (m *Map) CanExecute(name string) bool {
-	_,ok := m.commands[name]
+	m.mutex.Lock()
+	_, ok := m.commands[name]
+	m.mutex.Unlock()
 	return ok
 }
 

@@ -6,13 +6,16 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+/**
+Group a command group used for implementing things like !moderation ban @player
+ */
 type Group interface {
 	GetName() string
 	AddCommand(name string,cmd command.Command)
 	GetCommand(cmd string) command.Command
 	GetCommands() map[string]command.Command
 	CanExecute(cmd string) bool
-	Execute(cmd string,ctx ctx.Ctx,session *discordgo.Session) error
+	Execute(cmd string, ctx ctx.Ctx, session *discordgo.Session) error
 }
 
 type CmdGroup struct {

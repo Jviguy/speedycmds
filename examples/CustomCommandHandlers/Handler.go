@@ -32,7 +32,7 @@ func (h Handler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	}
 }
 
-func (h Handler) GetCommandHandler() *commandMap.Map {
+func (h Handler) GetCommandMap() *commandMap.Map {
 	return h.cmds
 }
 
