@@ -24,7 +24,7 @@ func main() {
 	//add a command to the said command group
 	pg.AddCommand("ping", Ping{})
 	//add the said command group to the commandHandler HERE THE NAME MATTERS
-	handler.GetCommandMap().RegisterCommandGroup("api",pg)
+	handler.GetCommandMap().RegisterCommandGroup("api", pg)
 	err = dg.Open()
 	if err != nil {
 		fmt.Println("error opening connection,", err)
