@@ -2,7 +2,6 @@ package utils
 
 import (
 	"github.com/agnivade/levenshtein"
-	"sort"
 )
 
 func FindClosest(search string, array []string) string {
