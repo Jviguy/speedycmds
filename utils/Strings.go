@@ -10,6 +10,18 @@ func FindClosest(search string, array []string) string {
     for _, name := range array {
         list = append(list, levenshtein.ComputeDistance(search, name))
     }
-    sort.Ints(list)
-    return array[list[0]]
+    min := list[0]
+    for _, num := range list {
+        if num < min {
+            min = num
+        }
+    }
+    var index int
+    for i, val := range list {
+        if val == min {
+            index = i
+            break    
+        }
+    }
+    return array[index]
 }
