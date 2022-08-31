@@ -12,10 +12,16 @@ type Map struct {
 	groups   map[string]Group
 }
 
-// RegisterCommandGroup registers a command group by its name to the command map.
-func (m *Map) RegisterCommandGroup(group Group) {
+// RegisterGroup registers a command group by its name to the command map.
+func (m *Map) RegisterGroup(group Group) {
 	if !m.GroupExists(group.Name()) && m.CanRegisterGroup(group) {
 		m.groups[strings.ToLower(group.Name())] = group
+	}
+}
+
+func (m *Map) RegisterGroups(groups []Group) {
+	for _, g := range groups {
+		m.RegisterGroup(g)
 	}
 }
 
@@ -97,6 +103,12 @@ func (m *Map) Commands() map[string]Command {
 func (m *Map) RegisterCommand(command Command, override bool) {
 	if m.CanRegisterCommand(command) || override {
 		m.commands[strings.ToLower(command.Name())] = command
+	}
+}
+
+func (m *Map) RegisterCommands(commands []Command, overide bool) {
+	for _, command := range commands {
+		m.RegisterCommand(command, overide)
 	}
 }
 

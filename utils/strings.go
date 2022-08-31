@@ -12,8 +12,8 @@ func FindClosest(target string, list []string) string {
 	if !ok {
 		return lev
 	}
-	if lev == fuz {
-		return "`" + lev + "`"
+	if lev == fuz || (lev == "" && fuz != "") {
+		return "`" + fuz + "`"
 	}
 	return "`" + fuz + "`" + " or `" + lev + "`?"
 }
