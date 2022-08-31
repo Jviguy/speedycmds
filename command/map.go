@@ -1,8 +1,8 @@
 package command
 
 import (
-	"github.com/Jviguy/SpeedyCmds/utils"
 	"github.com/bwmarrin/discordgo"
+	"github.com/jviguy/speedycmds/utils"
 	"strings"
 )
 
@@ -13,9 +13,9 @@ type Map struct {
 }
 
 // RegisterCommandGroup registers a command group by its name to the command map.
-func (m *Map) RegisterCommandGroup(name string, group Group) {
-	if !m.GroupExists(name) && m.CanRegisterGroup(name) {
-		m.groups[name] = group
+func (m *Map) RegisterCommandGroup(group Group) {
+	if !m.GroupExists(group.Name()) && m.CanRegisterGroup(group) {
+		m.groups[strings.ToLower(group.Name())] = group
 	}
 }
 
@@ -33,8 +33,8 @@ func (m *Map) Group(name string) Group {
 }
 
 // CanRegisterGroup returns true if a group can be registered under the name passed.
-func (m *Map) CanRegisterGroup(name string) bool {
-	return m.commands[name] == nil && !m.GroupExists(name)
+func (m *Map) CanRegisterGroup(group Group) bool {
+	return m.commands[group.Name()] == nil && !m.GroupExists(group.Name())
 }
 
 // GroupExists returns true if the group passed exists.
@@ -51,8 +51,9 @@ func (m *Map) Execute(command string, ctx Context, session *discordgo.Session) e
 	case m.GroupExists(command):
 		if len(ctx.Arguments()) > 0 {
 			args, cmd := utils.Shift(ctx.Arguments(), 0)
-			if m.Group(command).CanExecute(cmd) {
-				ct := NewBasicContext(args, ctx.Message(), session)
+			g := m.Group(command)
+			if g.CanExecute(cmd) {
+				ct := NewBasicContext(args, ctx.Message(), session, m, &g)
 				//custom ctx for the custom args needed
 				return m.Group(command).Execute(cmd, ct, session)
 			}
@@ -61,10 +62,18 @@ func (m *Map) Execute(command string, ctx Context, session *discordgo.Session) e
 	default:
 		em := discordgo.MessageEmbed{}
 		em.Title = "Unknown Command: " + command
-		em.Description = "You might have Meant: " + utils.FindClosest(command, utils.CommandMapToKeys(m.GroupedCommands()))
+		em.Description = "You might have Meant: " + utils.FindClosest(command, m.GetAllCommandNames())
 		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, &em)
 		return nil
 	}
+}
+
+func (m *Map) GetAllCommandNames() []string {
+	s := make([]string, len(m.commands))
+	for name, _ := range m.commands {
+		s = append(s, name)
+	}
+	return s
 }
 
 // GroupedCommands returns all grouped commands in the command map.
@@ -85,15 +94,15 @@ func (m *Map) Commands() map[string]Command {
 }
 
 // RegisterCommand registers a command to the command map using the information passed.
-func (m *Map) RegisterCommand(name string, command Command, override bool) {
-	if m.CanRegisterCommand(name) || override {
-		m.commands[strings.ToLower(name)] = command
+func (m *Map) RegisterCommand(command Command, override bool) {
+	if m.CanRegisterCommand(command) || override {
+		m.commands[strings.ToLower(command.Name())] = command
 	}
 }
 
 // CanRegisterCommand returns true if a command can be registered under the name passed.
-func (m *Map) CanRegisterCommand(name string) bool {
-	return m.commands[name] == nil && !m.GroupExists(name)
+func (m *Map) CanRegisterCommand(cmd Command) bool {
+	return m.commands[cmd.Name()] == nil && !m.GroupExists(cmd.Name())
 }
 
 // CanExecute returns true if a command can be executed by the name passed.

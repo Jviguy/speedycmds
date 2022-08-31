@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/GoingCommando.iml" filepath="$PROJECT_DIR$/.idea/GoingCommando.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/speedycmds.iml" filepath="$PROJECT_DIR$/.idea/speedycmds.iml" />
     </modules>
   </component>
 </project>

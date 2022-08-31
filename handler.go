@@ -1,9 +1,9 @@
 package speedycmds
 
 import (
-	"github.com/Jviguy/SpeedyCmds/command"
-	"github.com/Jviguy/SpeedyCmds/utils"
 	"github.com/bwmarrin/discordgo"
+	"github.com/jviguy/speedycmds/command"
+	"github.com/jviguy/speedycmds/utils"
 	"regexp"
 	"strings"
 )
@@ -53,9 +53,8 @@ func (h *BasicHandler) Handle(s *discordgo.Session, msg *discordgo.MessageCreate
 		if h.Regex {
 			args = commandRegex.FindAllString(strings.TrimPrefix(msg.Content, h.Prefix), -1)
 		}
-
 		args, cmd := utils.Shift(args, 0)
-		err := h.commands.Execute(cmd, command.NewBasicContext(args, msg, s), s)
+		err := h.commands.Execute(cmd, command.NewBasicContext(args, msg, s, h.commands, nil), s)
 		if err != nil {
 			em := &discordgo.MessageEmbed{}
 			em.Title = "An Error Occurred while executing that command"
