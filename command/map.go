@@ -62,7 +62,7 @@ func (m *Map) Execute(command string, ctx Context, session *discordgo.Session) e
 	default:
 		em := discordgo.MessageEmbed{}
 		em.Title = "Unknown Command: " + command
-		em.Description = "You might have Meant: " + utils.FindClosest(command, m.GetAllCommandNames())
+		em.Description = "You might have meant: " + utils.FindClosest(command, m.GetAllCommandNames())
 		_, _ = session.ChannelMessageSendEmbed(ctx.Channel().ID, &em)
 		return nil
 	}

@@ -12,7 +12,10 @@ func FindClosest(target string, list []string) string {
 	if !ok {
 		return lev
 	}
-	return "`" + lev + "`" + " or `" + fuz + "`?"
+	if lev == fuz {
+		return "`" + lev + "`"
+	}
+	return "`" + fuz + "`" + " or `" + lev + "`?"
 }
 
 // FindFuzzy finds a target in a list of strings using the Fuzzy matching algorithm.
@@ -26,27 +29,16 @@ func FindFuzzy(target string, list []string) (string, bool) {
 
 // FindLevenshtein finds a target in a list of strings using levenshtein distance.
 func FindLevenshtein(target string, list []string) string {
-	var results []int
+	var s string
+	md := 100000
 	for _, name := range list {
-		results = append(results, levenshtein.ComputeDistance(target, name))
-	}
-
-	min := results[0]
-	for _, num := range results {
-		if num < min {
-			min = num
+		d := levenshtein.ComputeDistance(target, name)
+		if d < md {
+			md = d
+			s = name
 		}
 	}
-
-	var index int
-	for i, val := range results {
-		if val == min {
-			index = i
-			break
-		}
-	}
-
-	return list[index]
+	return s
 }
 
 // Shift performs a shift on the slice passed based on the second parameter.
